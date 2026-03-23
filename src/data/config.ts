@@ -28,10 +28,8 @@ const config = {
     return this.site + "/assets/seo/og-image.png";
   },
   social: {
-    twitter: "",
+    x: "https://x.com/AnkitYadav67393",
     linkedin: "https://www.linkedin.com/in/ankit-kumar098/",
-    instagram: "",
-    facebook: "",
     github: "https://github.com/ankitydv098",
   },
 };
