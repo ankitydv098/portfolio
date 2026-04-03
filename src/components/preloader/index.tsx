@@ -11,6 +11,7 @@ import { AnimatePresence } from "framer-motion";
 
 import Loader from "./loader";
 import gsap from "gsap";
+import { useSoundContext } from "@/contexts/sound-context";
 
 type PreloaderContextType = {
   isLoading: boolean;
@@ -41,6 +42,7 @@ function Preloader({ children, disabled = false }: PreloaderProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingPercent, setLoadingPercent] = useState(0);
   const loadingTween = useRef<gsap.core.Tween>();
+  const { playSnap } = useSoundContext();
 
   const bypassLoading = () => {
     loadingTween.current?.progress(0.99).kill();
@@ -59,6 +61,7 @@ function Preloader({ children, disabled = false }: PreloaderProps) {
       },
       onComplete: () => {
         setIsLoading(false);
+        playSnap({ volume: 0.6, playbackRate: 1.0 });
         // observe: this change has not been observed for errors.
         // window.scrollTo(0, 0);
       },

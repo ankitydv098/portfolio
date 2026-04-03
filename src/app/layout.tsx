@@ -14,6 +14,8 @@ import EasterEggs from "@/components/easter-eggs";
 import { config } from "@/data/config";
 import SocketContextProvider from "@/contexts/socketio";
 import RemoteCursors from "@/components/realtime/remote-cursors";
+import SoundProvider from "@/contexts/sound-context";
+import SoundToggle from "@/components/sound-toggle";
 
 export const metadata: Metadata = {
   title: config.title,
@@ -72,23 +74,26 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
-          <Particles
-            className="fixed inset-0 -z-10 animate-fade-in"
-            quantity={100}
-          />
-          <Preloader>
-            <SocketContextProvider>
-              <RemoteCursors />
-              <TooltipProvider>
-                <Header />
-                {children}
-                <Footer />
-              </TooltipProvider>
-            </SocketContextProvider>
-            <Toaster />
-            <EasterEggs />
-            <ElasticCursor />
-          </Preloader>
+          <SoundProvider>
+            <Particles
+              className="fixed inset-0 -z-10 animate-fade-in"
+              quantity={100}
+            />
+            <Preloader>
+              <SocketContextProvider>
+                <RemoteCursors />
+                <TooltipProvider>
+                  <Header />
+                  {children}
+                  <Footer />
+                </TooltipProvider>
+              </SocketContextProvider>
+              <Toaster />
+              <EasterEggs />
+              <ElasticCursor />
+              <SoundToggle />
+            </Preloader>
+          </SoundProvider>
         </ThemeProvider>
       </body>
     </html>
